@@ -1,0 +1,97 @@
+{
+  "name": "Daily motivation Bot",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 8
+            },
+            {}
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "490de772-4b89-48fc-93d7-88d35cf1f3ba",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "url": "https://zenquotes.io/api/random",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        220,
+        0
+      ],
+      "id": "67216cdc-f633-4f56-a9dd-269bd5673339",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "chatId": "YOUR CHAT ID",
+        "text": "={{$json[\"q\"]}} — {{$json[\"a\"]}}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        440,
+        0
+      ],
+      "id": "e0be4959-c3f1-48e8-a75a-208434eb6cf8",
+      "name": "Telegram",
+      "webhookId": "12c9349a-4069-4476-b605-54bb7bb7e5bd",
+      "credentials": {
+        "telegramApi": {
+          "id": "Nvr9hwvTXqHOABkx",
+          "name": "Telegram account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Telegram",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "8b06e685-1dc1-4d8e-b28a-e52bfe6305b5",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "70f2893bad57cf5ca893b527fe692798f2728372406f2cf170910f2fe17def03"
+  },
+  "id": "WkYcwgmitPmCX2EI",
+  "tags": []
+}
